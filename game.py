@@ -1,5 +1,6 @@
 import pygame
 import random
+from learning_tracker import LearningTracker  # Importe a nova classe
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 400
@@ -8,6 +9,7 @@ FPS = 150
 
 class SnakeGame:
     def __init__(self):
+        self.learning_tracker = LearningTracker()
         pygame.init()
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption("Snake AI")
@@ -20,7 +22,7 @@ class SnakeGame:
         self.snake = [[BLOCK_SIZE * 5, BLOCK_SIZE * 5], [BLOCK_SIZE * 4, BLOCK_SIZE * 5], [BLOCK_SIZE * 3, BLOCK_SIZE * 5]]
         self.direction = 'RIGHT'
         self.change_to = self.direction
-        self.wall = self.spawn_wall()
+        #self.wall = self.spawn_wall()
         self.food = self.spawn_food()
         self.score = 0
     
@@ -49,8 +51,8 @@ class SnakeGame:
             return True
         
         # collission with wall
-        if point[0] == self.wall[0] and point[1] == self.wall[1]:
-            return True
+        #if point[0] == self.wall[0] and point[1] == self.wall[1]:
+        #    return True
         return False
 
     def move(self):
@@ -88,7 +90,7 @@ class SnakeGame:
         pygame.draw.rect(self.screen, (255, 0, 0), pygame.Rect(self.food[0], self.food[1], BLOCK_SIZE, BLOCK_SIZE))
         
         #draw wall
-        pygame.draw.rect(self.screen, (170, 0, 255), pygame.Rect(self.wall[0], self.wall[1], BLOCK_SIZE, BLOCK_SIZE))
+        #pygame.draw.rect(self.screen, (170, 0, 255), pygame.Rect(self.wall[0], self.wall[1], BLOCK_SIZE, BLOCK_SIZE))
         
         score_text = self.font.render(f"Score: {self.score}", True, (255, 255, 0))
         record_text = self.font.render(f"Record: {self.record}", True, (255, 255, 0))
@@ -115,6 +117,9 @@ class SnakeGame:
         if self.is_collision():
             reward = -10
             game_over = True
+            
+            self.learning_tracker.record_score(self.score)
+
             self.reset()
 
         self.render()
