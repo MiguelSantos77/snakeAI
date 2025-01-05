@@ -9,8 +9,10 @@ class TK:
     def __init__(self, root):
         self.agent = SnakeAgent()
 
+
+        root.geometry("200x250")
         self.root = root
-        self.root.title("Snake AI Interface")
+        self.root.title("UI")
 
         self.start_button = tk.Button(root, text="Start Training", command=self.start_training)
         self.start_button.pack(pady=10)
