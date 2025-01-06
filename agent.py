@@ -1,5 +1,4 @@
 from game import SnakeGame ,BLOCK_SIZE
-import numpy as np
 import random
 
 class SnakeAgent:
@@ -27,10 +26,6 @@ class SnakeAgent:
             self.game.food[0] > head[0], 
             self.game.food[1] < head[1], 
             self.game.food[1] > head[1]
-            #self.game.wall[0] < head[0], 
-            #self.game.wall[0] > head[0], 
-            #self.game.wall[1] < head[1], 
-            #self.game.wall[1] > head[1]  
         ]
         return tuple(state)
 

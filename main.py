@@ -23,8 +23,6 @@ class TK:
         self.load_button = tk.Button(root, text="Load QTable", command=self.load_q_table)
         self.load_button.pack(pady=10)
 
-        self.reset_button = tk.Button(root, text="Reset", command=self.reset_agent)
-        self.reset_button.pack(pady=10)
 
         self.plot_button = tk.Button(root, text="Show Learning Grath", command=self.plot_progress)
         self.plot_button.pack(pady=10)
@@ -52,9 +50,7 @@ class TK:
         except FileNotFoundError:
             print("Q_table not found")
 
-    def reset_agent(self):
-        self.agent.q_table = {}
-        self.agent.game.reset()
+
 
 
     def plot_progress(self):
